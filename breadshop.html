@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Живий Хліб — Пекарня на заквасці</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+–cream: #f5f0e8;
+–warm-white: #faf8f3;
+–wheat: #d4a853;
+–wheat-light: #e8c882;
+–dark: #1c1a16;
+–bark: #5c4a32;
+–earth: #8b6f47;
+–sage: #7a8c6e;
+–rye: #3d2b1f;
+–text: #2d2520;
+–muted: #7a6a58;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+font-family: ‘Jost’, sans-serif;
+background: var(–cream);
+color: var(–text);
+overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+padding: 0 5%;
+display: flex; align-items: center; justify-content: space-between;
+height: 70px;
+background: rgba(245,240,232,0.92);
+backdrop-filter: blur(12px);
+border-bottom: 1px solid rgba(212,168,83,0.25);
+}
+
+.nav-logo {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.35rem;
+font-weight: 800;
+color: var(–rye);
+letter-spacing: -0.02em;
+text-decoration: none;
+}
+.nav-logo span { color: var(–wheat); }
+
+.nav-links {
+display: flex; gap: 2.5rem; list-style: none;
+}
+.nav-links a {
+font-size: 0.8rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–bark);
+text-decoration: none;
+font-weight: 500;
+transition: color 0.25s;
+}
+.nav-links a:hover { color: var(–wheat); }
+
+.nav-cta {
+background: var(–rye);
+color: var(–wheat-light) !important;
+padding: 0.55rem 1.4rem;
+border-radius: 2px;
+}
+.nav-cta:hover { background: var(–bark); color: var(–wheat-light) !important; }
+
+.hamburger {
+display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+display: block; width: 26px; height: 2px;
+background: var(–rye); border-radius: 2px;
+transition: all 0.3s;
+}
+
+.mobile-menu {
+display: none; position: fixed; top: 70px; left: 0; right: 0;
+background: var(–warm-white); z-index: 99;
+padding: 2rem;
+flex-direction: column; gap: 1.5rem;
+border-bottom: 2px solid var(–wheat);
+animation: slideDown 0.3s ease;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase;
+color: var(–bark); text-decoration: none; font-weight: 500;
+padding-bottom: 1rem; border-bottom: 1px solid rgba(212,168,83,0.2);
+}
+
+@keyframes slideDown {
+from { opacity: 0; transform: translateY(-10px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HERO ── */
+.hero {
+min-height: 100vh;
+display: grid;
+grid-template-columns: 1fr 1fr;
+padding-top: 70px;
+}
+
+.hero-left {
+display: flex; flex-direction: column; justify-content: center;
+padding: 8% 7% 8% 8%;
+position: relative;
+}
+
+.hero-badge {
+display: inline-flex; align-items: center; gap: 0.5rem;
+background: rgba(212,168,83,0.15);
+border: 1px solid rgba(212,168,83,0.4);
+color: var(–bark);
+font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+padding: 0.4rem 1rem; border-radius: 20px;
+width: fit-content; margin-bottom: 2rem;
+}
+
+.hero-title {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(3rem, 5.5vw, 5.5rem);
+line-height: 1.05;
+color: var(–rye);
+font-weight: 800;
+margin-bottom: 1.5rem;
+}
+.hero-title em { color: var(–wheat); font-style: italic; }
+
+.hero-sub {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: clamp(1rem, 1.5vw, 1.3rem);
+line-height: 1.7;
+color: var(–muted);
+font-weight: 300;
+max-width: 440px;
+margin-bottom: 3rem;
+}
+
+.hero-actions {
+display: flex; gap: 1rem; flex-wrap: wrap;
+}
+
+.btn-primary {
+background: var(–rye); color: var(–wheat-light);
+font-family: ‘Jost’, sans-serif;
+font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+padding: 1rem 2.2rem; text-decoration: none;
+border: 2px solid var(–rye); border-radius: 2px;
+font-weight: 500; transition: all 0.3s;
+cursor: pointer;
+}
+.btn-primary:hover { background: transparent; color: var(–rye); }
+
+.btn-outline {
+background: transparent; color: var(–bark);
+font-family: ‘Jost’, sans-serif;
+font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+padding: 1rem 2.2rem; text-decoration: none;
+border: 2px solid rgba(92,74,50,0.35); border-radius: 2px;
+font-weight: 500; transition: all 0.3s;
+cursor: pointer;
+}
+.btn-outline:hover { border-color: var(–wheat); color: var(–wheat); }
+
+.hero-stats {
+display: flex; gap: 2.5rem; margin-top: 4rem;
+padding-top: 2rem; border-top: 1px solid rgba(212,168,83,0.25);
+}
+.stat-num {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.8rem; font-weight: 800; color: var(–wheat);
+display: block;
+}
+.stat-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(–muted); }
+
+.hero-right {
+position: relative; overflow: hidden;
+background: var(–rye);
+}
+
+/* SVG Bread Illustration */
+.bread-scene {
+width: 100%; height: 100%;
+display: flex; align-items: center; justify-content: center;
+padding: 60px 40px;
+position: relative;
+}
+
+.hero-bg-text {
+position: absolute; bottom: 60px; right: -20px;
+font-family: ‘Playfair Display’, serif;
+font-size: 8rem; font-weight: 800;
+color: rgba(212,168,83,0.07);
+white-space: nowrap;
+letter-spacing: -0.05em;
+pointer-events: none;
+}
+
+/* ── SECTION SHARED ── */
+section { padding: 100px 8%; }
+
+.section-label {
+font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+color: var(–wheat); font-weight: 500; margin-bottom: 1rem;
+display: flex; align-items: center; gap: 0.8rem;
+}
+.section-label::before {
+content: ‘’; display: block; width: 30px; height: 1px; background: var(–wheat);
+}
+
+.section-title {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(2rem, 3.5vw, 3.2rem);
+color: var(–rye); font-weight: 800;
+line-height: 1.1; margin-bottom: 1.5rem;
+}
+
+.section-title em { font-style: italic; color: var(–wheat); }
+
+.section-body {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.2rem; line-height: 1.8;
+color: var(–muted); font-weight: 300;
+max-width: 600px;
+}
+
+/* ── PRODUCTS ── */
+#products { background: var(–warm-white); }
+
+.products-header {
+display: flex; justify-content: space-between; align-items: flex-end;
+margin-bottom: 4rem; flex-wrap: wrap; gap: 1.5rem;
+}
+
+.products-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 2px;
+}
+
+.product-card {
+background: var(–cream);
+overflow: hidden;
+position: relative;
+cursor: pointer;
+transition: transform 0.4s;
+}
+.product-card:hover { transform: translateY(-4px); z-index: 2; }
+
+.product-img {
+width: 100%; height: 300px;
+display: flex; align-items: center; justify-content: center;
+overflow: hidden; position: relative;
+}
+
+.product-img svg { width: 100%; height: 100%; object-fit: cover; }
+
+.product-body { padding: 1.8rem; }
+
+.product-tag {
+font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+color: var(–sage); margin-bottom: 0.5rem;
+}
+
+.product-name {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.4rem; font-weight: 700; color: var(–rye);
+margin-bottom: 0.5rem;
+}
+
+.product-desc {
+font-size: 0.87rem; color: var(–muted); line-height: 1.6; margin-bottom: 1.3rem;
+}
+
+.product-footer {
+display: flex; align-items: center; justify-content: space-between;
+}
+
+.product-price {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.5rem; font-weight: 700; color: var(–wheat);
+}
+.product-price span { font-size: 0.8rem; color: var(–muted); font-family: ‘Jost’, sans-serif; font-weight: 300; }
+
+.btn-add {
+background: var(–rye); color: var(–wheat-light);
+border: none; padding: 0.6rem 1.3rem;
+font-family: ‘Jost’, sans-serif;
+font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+cursor: pointer; border-radius: 2px; transition: all 0.25s;
+}
+.btn-add:hover { background: var(–bark); }
+
+/* ── WHY SOURDOUGH ── */
+#why { background: var(–rye); color: var(–cream); }
+#why .section-title { color: var(–wheat-light); }
+#why .section-body { color: rgba(245,240,232,0.65); }
+
+.why-grid {
+display: grid; grid-template-columns: 1fr 1fr;
+gap: 4rem; margin-top: 5rem; align-items: center;
+}
+
+.comparison-table {
+background: rgba(245,240,232,0.05);
+border: 1px solid rgba(212,168,83,0.2);
+border-radius: 4px; overflow: hidden;
+}
+
+.ct-header {
+display: grid; grid-template-columns: 1fr 1fr 1fr;
+background: rgba(212,168,83,0.12);
+padding: 1rem 1.5rem;
+font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+color: var(–wheat-light); font-weight: 500;
+}
+
+.ct-row {
+display: grid; grid-template-columns: 1fr 1fr 1fr;
+padding: 1rem 1.5rem;
+border-top: 1px solid rgba(212,168,83,0.1);
+font-size: 0.88rem; align-items: center;
+}
+.ct-row:hover { background: rgba(212,168,83,0.06); }
+
+.ct-label { color: rgba(245,240,232,0.7); }
+.ct-good { color: #a8c97a; font-weight: 500; }
+.ct-bad  { color: rgba(245,240,232,0.35); font-weight: 300; }
+
+.benefits-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.benefit-item {
+display: flex; gap: 1.2rem; align-items: flex-start;
+}
+
+.benefit-icon {
+flex-shrink: 0;
+width: 44px; height: 44px;
+background: rgba(212,168,83,0.12);
+border: 1px solid rgba(212,168,83,0.25);
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 1.2rem;
+}
+
+.benefit-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.05rem; font-weight: 600;
+color: var(–wheat-light); margin-bottom: 0.3rem;
+}
+.benefit-desc { font-size: 0.85rem; color: rgba(245,240,232,0.55); line-height: 1.6; }
+
+/* ── ARTICLES ── */
+#articles { background: var(–cream); }
+
+.articles-grid {
+display: grid; grid-template-columns: 2fr 1fr;
+gap: 2px; margin-top: 4rem;
+}
+
+.article-card {
+background: var(–warm-white);
+overflow: hidden; cursor: pointer;
+transition: transform 0.3s;
+}
+.article-card:hover { transform: translateY(-3px); }
+
+.article-img {
+width: 100%; height: 260px;
+display: flex; align-items: center; justify-content: center;
+overflow: hidden;
+}
+
+.article-body { padding: 1.8rem; }
+
+.article-cat {
+font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+color: var(–wheat); margin-bottom: 0.8rem;
+}
+
+.article-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.25rem; font-weight: 700; color: var(–rye);
+line-height: 1.3; margin-bottom: 0.8rem;
+}
+
+.article-desc { font-size: 0.85rem; color: var(–muted); line-height: 1.6; }
+
+.article-read {
+display: inline-flex; align-items: center; gap: 0.4rem;
+font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+color: var(–wheat); font-weight: 500; margin-top: 1rem;
+text-decoration: none;
+}
+
+.articles-side { display: flex; flex-direction: column; gap: 2px; }
+
+.article-small {
+background: var(–warm-white); padding: 1.6rem;
+cursor: pointer; transition: background 0.25s;
+flex: 1;
+}
+.article-small:hover { background: rgba(212,168,83,0.08); }
+
+/* ── DELIVERY & PAYMENT ── */
+#delivery { background: var(–warm-white); }
+
+.delivery-grid {
+display: grid; grid-template-columns: 1fr 1fr;
+gap: 5rem; margin-top: 4rem; align-items: flex-start;
+}
+
+.delivery-block h3 {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.6rem; font-weight: 700; color: var(–rye);
+margin-bottom: 2rem;
+}
+
+.delivery-steps { display: flex; flex-direction: column; gap: 1.3rem; }
+
+.d-step {
+display: flex; gap: 1rem; align-items: flex-start;
+padding: 1.2rem 1.4rem;
+background: var(–cream);
+border-left: 3px solid var(–wheat);
+border-radius: 0 4px 4px 0;
+}
+
+.d-num {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.4rem; font-weight: 800; color: var(–wheat);
+flex-shrink: 0; line-height: 1;
+}
+
+.d-content h4 { font-size: 0.9rem; font-weight: 600; color: var(–rye); margin-bottom: 0.3rem; }
+.d-content p { font-size: 0.83rem; color: var(–muted); line-height: 1.5; }
+
+.payment-options { display: flex; flex-direction: column; gap: 1rem; }
+
+.pay-card {
+display: flex; align-items: center; gap: 1.2rem;
+padding: 1.2rem 1.4rem;
+background: var(–cream); border-radius: 4px;
+border: 1px solid rgba(212,168,83,0.2);
+}
+
+.pay-icon {
+width: 46px; height: 46px;
+background: var(–rye); border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 1.2rem; flex-shrink: 0;
+}
+
+.pay-info h4 { font-size: 0.9rem; font-weight: 600; color: var(–rye); margin-bottom: 0.2rem; }
+.pay-info p  { font-size: 0.8rem; color: var(–muted); }
+
+/* ── CONTACT ── */
+#contacts {
+background: var(–rye);
+position: relative; overflow: hidden;
+}
+#contacts .section-title { color: var(–wheat-light); }
+#contacts .section-label  { color: rgba(212,168,83,0.7); }
+#contacts .section-label::before { background: rgba(212,168,83,0.4); }
+
+.contacts-bg-circle {
+position: absolute; right: -200px; top: -200px;
+width: 600px; height: 600px; border-radius: 50%;
+background: rgba(212,168,83,0.04);
+border: 1px solid rgba(212,168,83,0.08);
+pointer-events: none;
+}
+
+.contacts-grid {
+display: grid; grid-template-columns: 1fr 1fr;
+gap: 5rem; margin-top: 4rem; align-items: flex-start;
+}
+
+.contact-methods { display: flex; flex-direction: column; gap: 1.2rem; }
+
+.contact-item {
+display: flex; align-items: center; gap: 1.2rem;
+padding: 1.2rem 1.5rem;
+background: rgba(245,240,232,0.05);
+border: 1px solid rgba(212,168,83,0.15);
+border-radius: 4px;
+text-decoration: none;
+transition: background 0.25s;
+}
+.contact-item:hover { background: rgba(212,168,83,0.1); }
+
+.ci-icon {
+font-size: 1.3rem; width: 40px; text-align: center; flex-shrink: 0;
+}
+.ci-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(–wheat); margin-bottom: 0.2rem; }
+.ci-value { font-size: 0.95rem; color: var(–cream); font-weight: 400; }
+
+/* Contact Form */
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label {
+font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+color: rgba(245,240,232,0.5);
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+background: rgba(245,240,232,0.06);
+border: 1px solid rgba(212,168,83,0.2);
+color: var(–cream);
+padding: 0.85rem 1rem;
+font-family: ‘Jost’, sans-serif;
+font-size: 0.9rem;
+border-radius: 2px;
+outline: none;
+transition: border-color 0.25s;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(245,240,232,0.25); }
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: var(–wheat); }
+.form-group textarea { height: 110px; resize: none; }
+.form-group select option { background: var(–rye); }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* ── FOOTER ── */
+footer {
+background: var(–dark);
+padding: 4rem 8% 2rem;
+}
+
+.footer-top {
+display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+gap: 3rem; padding-bottom: 3rem;
+border-bottom: 1px solid rgba(212,168,83,0.12);
+margin-bottom: 2rem;
+}
+
+.footer-brand p {
+font-size: 0.85rem; color: rgba(245,240,232,0.4);
+line-height: 1.7; margin-top: 1rem; max-width: 260px;
+}
+
+.footer-col h5 {
+font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+color: var(–wheat); margin-bottom: 1.2rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-col a {
+font-size: 0.85rem; color: rgba(245,240,232,0.45); text-decoration: none;
+transition: color 0.2s;
+}
+.footer-col a:hover { color: var(–wheat-light); }
+
+.footer-bottom {
+display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+}
+.footer-bottom p { font-size: 0.78rem; color: rgba(245,240,232,0.25); }
+
+/* ── WHEAT DECO DIVIDER ── */
+.wheat-divider {
+display: flex; align-items: center; justify-content: center;
+gap: 1.5rem; padding: 2rem 0;
+opacity: 0.35;
+}
+.wheat-divider::before,
+.wheat-divider::after {
+content: ‘’; flex: 1; height: 1px; background: var(–wheat);
+}
+
+/* ── ANIMATIONS ── */
+.fade-in {
+opacity: 0; transform: translateY(30px);
+animation: fadeUp 0.8s ease forwards;
+}
+@keyframes fadeUp {
+to { opacity: 1; transform: translateY(0); }
+}
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; }
+.delay-4 { animation-delay: 0.6s; }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+nav { padding: 0 4%; }
+.nav-links { display: none; }
+.hamburger { display: flex; }
+
+```
+.hero {
+  grid-template-columns: 1fr;
+  min-height: auto;
+}
+.hero-left { padding: 6% 6% 4%; }
+.hero-right { height: 350px; }
+.hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+
+section { padding: 70px 6%; }
+
+.products-grid { grid-template-columns: 1fr; gap: 1px; }
+.product-img { height: 240px; }
+
+.why-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+.articles-grid { grid-template-columns: 1fr; }
+.articles-side { flex-direction: row; gap: 2px; }
+.article-small { min-height: 220px; }
+
+.delivery-grid { grid-template-columns: 1fr; gap: 3rem; }
+.contacts-grid { grid-template-columns: 1fr; gap: 3rem; }
+.form-row { grid-template-columns: 1fr; }
+
+.footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+.footer-brand { grid-column: 1/-1; }
+```
+
+}
+
+@media (max-width: 600px) {
+.hero-title { font-size: 2.5rem; }
+.hero-actions { flex-direction: column; }
+.btn-primary, .btn-outline { text-align: center; }
+.products-grid { grid-template-columns: 1fr; }
+.articles-side { flex-direction: column; }
+.footer-top { grid-template-columns: 1fr; }
+.footer-brand { grid-column: auto; }
+.ct-header, .ct-row { grid-template-columns: 2fr 1fr 1fr; font-size: 0.75rem; padding: 0.8rem 1rem; }
+}
+
+/* notification toast */
+.toast {
+position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+background: var(–rye); color: var(–wheat-light);
+padding: 1rem 1.8rem; border-radius: 4px;
+font-size: 0.88rem; letter-spacing: 0.05em;
+transform: translateY(100px); opacity: 0;
+transition: all 0.4s;
+border-left: 4px solid var(–wheat);
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <a href="#" class="nav-logo">Живий<span>Хліб</span></a>
+  <ul class="nav-links">
+    <li><a href="#products">Продукти</a></li>
+    <li><a href="#why">Про хліб</a></li>
+    <li><a href="#articles">Статті</a></li>
+    <li><a href="#delivery">Доставка</a></li>
+    <li><a href="#contacts" class="nav-cta">Замовити</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" id="ham">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" onclick="toggleMenu()">Продукти</a>
+  <a href="#why" onclick="toggleMenu()">Про хліб</a>
+  <a href="#articles" onclick="toggleMenu()">Статті</a>
+  <a href="#delivery" onclick="toggleMenu()">Доставка</a>
+  <a href="#contacts" onclick="toggleMenu()">Замовити</a>
+</div>
+
+<!-- HERO -->
+
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <div class="hero-badge fade-in">🌾 Без дріжджів · Без добавок · Живий хліб</div>
+    <h1 class="hero-title fade-in delay-1">
+      Хліб,<br>що <em>живе</em><br>і дихає
+    </h1>
+    <p class="hero-sub fade-in delay-2">
+      Ми випікаємо хліб на живій заквасці з органічного борошна — так, як це робили покоління наших предків. Без цукру, без дріжджів, без компромісів.
+    </p>
+    <div class="hero-actions fade-in delay-3">
+      <a href="#products" class="btn-primary">Обрати хліб</a>
+      <a href="#why" class="btn-outline">Чому закваска?</a>
+    </div>
+    <div class="hero-stats fade-in delay-4">
+      <div>
+        <span class="stat-num">72год</span>
+        <span class="stat-label">Ферментація</span>
+      </div>
+      <div>
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Органіка</span>
+      </div>
+      <div>
+        <span class="stat-num">5★</span>
+        <span class="stat-label">Відгуки</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="bread-scene">
+      <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background warmth gradient -->
+        <defs>
+          <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#4a2e1a" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#1c1208" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="breadGrad" cx="40%" cy="35%" r="70%">
+            <stop offset="0%" stop-color="#c8833a"/>
+            <stop offset="40%" stop-color="#9e5a1f"/>
+            <stop offset="100%" stop-color="#6b3710"/>
+          </radialGradient>
+          <radialGradient id="crumbGrad" cx="50%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#f2d9a2"/>
+            <stop offset="60%" stop-color="#e0b96a"/>
+            <stop offset="100%" stop-color="#c8933a"/>
+          </radialGradient>
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="15" stdDeviation="20" flood-color="#000" flood-opacity="0.5"/>
+          </filter>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+```
+    <!-- Subtle bg glow -->
+    <ellipse cx="300" cy="250" rx="280" ry="200" fill="url(#bgGrad)" opacity="0.6"/>
+
+    <!-- Wheat stalks left -->
+    <g opacity="0.5">
+      <line x1="60" y1="480" x2="80" y2="200" stroke="#d4a853" stroke-width="2"/>
+      <ellipse cx="80" cy="195" rx="6" ry="18" fill="#d4a853" transform="rotate(-10,80,195)"/>
+      <ellipse cx="75" cy="215" rx="5" ry="14" fill="#c8933a" transform="rotate(-20,75,215)"/>
+      <ellipse cx="85" cy="210" rx="5" ry="14" fill="#c8933a" transform="rotate(15,85,210)"/>
+      <line x1="40" y1="480" x2="55" y2="220" stroke="#c8833a" stroke-width="1.5" opacity="0.7"/>
+      <ellipse cx="55" cy="215" rx="5" ry="15" fill="#c8833a" transform="rotate(-5,55,215)"/>
+    </g>
+
+    <!-- Wheat stalks right -->
+    <g opacity="0.5">
+      <line x1="540" y1="480" x2="520" y2="180" stroke="#d4a853" stroke-width="2"/>
+      <ellipse cx="520" cy="175" rx="6" ry="18" fill="#d4a853" transform="rotate(10,520,175)"/>
+      <ellipse cx="514" cy="195" rx="5" ry="14" fill="#c8933a" transform="rotate(-15,514,195)"/>
+      <ellipse cx="526" cy="192" rx="5" ry="14" fill="#c8933a" transform="rotate(20,526,192)"/>
+      <line x1="560" y1="480" x2="545" y2="210" stroke="#c8833a" stroke-width="1.5" opacity="0.7"/>
+      <ellipse cx="545" cy="205" rx="5" ry="15" fill="#c8833a" transform="rotate(5,545,205)"/>
+    </g>
+
+    <!-- Loaf shadow -->
+    <ellipse cx="300" cy="400" rx="180" ry="25" fill="#000" opacity="0.35"/>
+
+    <!-- Main bread loaf body -->
+    <g filter="url(#shadow)">
+      <ellipse cx="300" cy="320" rx="175" ry="95" fill="url(#breadGrad)"/>
+      <!-- Crust texture shading -->
+      <ellipse cx="270" cy="305" rx="140" ry="70" fill="rgba(200,131,58,0.3)"/>
+      <ellipse cx="320" cy="290" rx="100" ry="50" fill="rgba(220,160,80,0.2)"/>
+    </g>
+
+    <!-- Bread scoring (decorative slashes on top) -->
+    <g stroke="#6b3710" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round">
+      <path d="M200 285 Q230 270 260 285"/>
+      <path d="M230 265 Q260 250 290 265"/>
+      <path d="M260 253 Q290 240 320 253"/>
+      <path d="M290 248 Q320 235 350 248"/>
+      <path d="M320 253 Q350 240 380 255"/>
+      <path d="M340 265 Q370 252 400 267"/>
+      <path d="M355 280 Q382 267 410 282"/>
+    </g>
+
+    <!-- Ear/ridge line on top -->
+    <path d="M170 310 Q300 235 430 315" stroke="rgba(100,55,20,0.5)" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+    <!-- Cut slice in front -->
+    <g filter="url(#shadow)">
+      <!-- Slice side (crust) -->
+      <path d="M130 290 L150 270 L150 380 L130 400 Z" fill="#8b4a20"/>
+      <!-- Slice front face -->
+      <ellipse cx="150" cy="325" rx="58" ry="85" fill="#e8c06a" transform="rotate(5,150,325)"/>
+      <!-- Crumb texture -->
+      <ellipse cx="150" cy="325" rx="48" ry="74" fill="url(#crumbGrad)" transform="rotate(5,150,325)"/>
+      <!-- Holes in crumb -->
+      <g fill="rgba(150,100,40,0.35)">
+        <ellipse cx="140" cy="300" rx="10" ry="7" transform="rotate(-10,140,300)"/>
+        <ellipse cx="165" cy="315" rx="7" ry="5" transform="rotate(15,165,315)"/>
+        <ellipse cx="148" cy="330" rx="12" ry="8" transform="rotate(5,148,330)"/>
+        <ellipse cx="135" cy="350" rx="8" ry="6" transform="rotate(-8,135,350)"/>
+        <ellipse cx="162" cy="344" rx="9" ry="6" transform="rotate(12,162,344)"/>
+        <ellipse cx="144" cy="360" rx="6" ry="5"/>
+        <ellipse cx="158" cy="290" rx="7" ry="5" transform="rotate(-5,158,290)"/>
+      </g>
+      <!-- Crust ring on slice -->
+      <ellipse cx="150" cy="325" rx="58" ry="85" fill="none" stroke="#c8833a" stroke-width="6" transform="rotate(5,150,325)"/>
+    </g>
+
+    <!-- Flour dust -->
+    <g opacity="0.4">
+      <circle cx="200" cy="400" r="3" fill="#f5f0e8"/>
+      <circle cx="240" cy="395" r="2" fill="#f5f0e8"/>
+      <circle cx="180" cy="405" r="2" fill="#f5f0e8"/>
+      <circle cx="220" cy="408" r="1.5" fill="#f5f0e8"/>
+      <circle cx="260" cy="402" r="2.5" fill="#f5f0e8"/>
+      <circle cx="350" cy="398" r="2" fill="#f5f0e8"/>
+      <circle cx="380" cy="405" r="1.5" fill="#f5f0e8"/>
+      <circle cx="400" cy="395" r="3" fill="#f5f0e8"/>
+    </g>
+
+    <!-- Steam wisps -->
+    <g stroke="rgba(245,240,232,0.3)" stroke-width="2" fill="none" stroke-linecap="round">
+      <path d="M270 230 Q265 210 272 190 Q279 170 274 150">
+        <animate attributeName="d" dur="3s" repeatCount="indefinite"
+          values="M270 230 Q265 210 272 190 Q279 170 274 150;
+                  M270 230 Q278 210 270 190 Q262 170 270 150;
+                  M270 230 Q265 210 272 190 Q279 170 274 150"/>
+        <animate attributeName="opacity" dur="3s" repeatCount="indefinite" values="0.3;0;0.3"/>
+      </path>
+      <path d="M300 220 Q295 200 302 180 Q309 160 304 140">
+        <animate attributeName="d" dur="3.5s" repeatCount="indefinite"
+          values="M300 220 Q295 200 302 180 Q309 160 304 140;
+                  M300 220 Q308 200 300 180 Q292 160 300 140;
+                  M300 220 Q295 200 302 180 Q309 160 304 140"/>
+        <animate attributeName="opacity" dur="3.5s" repeatCount="indefinite" values="0.3;0;0.3"/>
+      </path>
+      <path d="M330 228 Q325 208 332 188 Q339 168 334 148">
+        <animate attributeName="d" dur="4s" repeatCount="indefinite"
+          values="M330 228 Q325 208 332 188 Q339 168 334 148;
+                  M330 228 Q338 208 330 188 Q322 168 330 148;
+                  M330 228 Q325 208 332 188 Q339 168 334 148"/>
+        <animate attributeName="opacity" dur="4s" repeatCount="indefinite" values="0.25;0;0.25"/>
+      </path>
+    </g>
+  </svg>
+</div>
+<div class="hero-bg-text">Закваска</div>
+```
+
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+
+<section id="products">
+  <div class="products-header">
+    <div>
+      <div class="section-label">Наш асортимент</div>
+      <h2 class="section-title">Свіжий хліб<br><em>щодня</em></h2>
+    </div>
+    <p class="section-body" style="max-width:380px; font-size:1rem;">
+      Кожен хліб випікається невеликою партією вручну. Замовляйте напередодні, щоб гарантувати свою буханку.
+    </p>
+  </div>
+  <div class="products-grid">
+    <!-- Card 1 -->
+    <div class="product-card">
+      <div class="product-img" style="background: linear-gradient(135deg, #8b4a20, #5c2e0e);">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="b1" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#c8833a"/><stop offset="100%" stop-color="#7a3d10"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="200" cy="200" rx="160" ry="80" fill="#3d1a08" opacity="0.5"/>
+          <ellipse cx="200" cy="170" rx="155" ry="85" fill="url(#b1)"/>
+          <path d="M80 155 Q200 100 320 160" stroke="#5c2e0e" stroke-width="5" fill="none"/>
+          <path d="M100 165 Q140 155 160 168" stroke="#5c2e0e" stroke-width="3" fill="none"/>
+          <path d="M170 155 Q210 145 230 158" stroke="#5c2e0e" stroke-width="3" fill="none"/>
+          <path d="M240 162 Q280 152 300 165" stroke="#5c2e0e" stroke-width="3" fill="none"/>
+          <text x="200" y="240" text-anchor="middle" font-family="serif" font-size="22" fill="rgba(245,220,180,0.7)" letter-spacing="3">Пшеничний</text>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-tag">🌾 Класика</div>
+        <div class="product-name">Деревенський пшеничний</div>
+        <div class="product-desc">Ніжна м'якушка з тонкою хрусткою скоринкою. 72 год ферментації на живій заквасці. Вага 800 г.</div>
+        <div class="product-footer">
+          <div class="product-price">150 грн <span>/ буханка</span></div>
+          <button class="btn-add" onclick="addToCart('Деревенський пшеничний')">+ Замовити</button>
+        </div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="product-card">
+      <div class="product-img" style="background: linear-gradient(135deg, #2d1f0e, #1a0f05);">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="b2" cx="45%" cy="40%" r="65%">
+              <stop offset="0%" stop-color="#5c3a1e"/><stop offset="100%" stop-color="#2a1408"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="200" cy="205" rx="155" ry="78" fill="#1a0c04" opacity="0.5"/>
+          <ellipse cx="200" cy="172" rx="150" ry="82" fill="url(#b2)"/>
+          <g stroke="#1a0a03" stroke-width="4" fill="none">
+            <path d="M90 165 Q200 108 310 168"/>
+            <path d="M110 175 Q150 162 180 175"/>
+            <path d="M195 163 Q235 150 265 164"/>
+          </g>
+          <!-- Rye texture dots -->
+          <g fill="rgba(100,60,20,0.4)">
+            <circle cx="160" cy="155" r="5"/><circle cx="200" cy="148" r="4"/><circle cx="240" cy="158" r="5"/>
+            <circle cx="180" cy="170" r="3"/><circle cx="220" cy="165" r="4"/><circle cx="260" cy="172" r="3"/>
+          </g>
+          <text x="200" y="240" text-anchor="middle" font-family="serif" font-size="22" fill="rgba(200,160,80,0.7)" letter-spacing="3">Житній</text>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-tag">🌿 Без глютену мало</div>
+        <div class="product-name">Темний житній бородинський</div>
+        <div class="product-desc">Насичений смак із нотками солоду та коріандру. Класичний рецепт з органічного житнього борошна. Вага 700 г.</div>
+        <div class="product-footer">
+          <div class="product-price">170 грн <span>/ буханка</span></div>
+          <button class="btn-add" onclick="addToCart('Темний житній')">+ Замовити</button>
+        </div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="product-card">
+      <div class="product-img" style="background: linear-gradient(135deg, #7a6030, #4a380e);">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="b3" cx="50%" cy="35%" r="65%">
+              <stop offset="0%" stop-color="#d4a040"/><stop offset="100%" stop-color="#8b6020"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="200" cy="205" rx="155" ry="75" fill="#3a2808" opacity="0.5"/>
+          <ellipse cx="200" cy="170" rx="150" ry="84" fill="url(#b3)"/>
+          <!-- Seeds on top -->
+          <g fill="rgba(80,55,20,0.7)" transform="rotate(0)">
+            <ellipse cx="160" cy="150" rx="8" ry="3" transform="rotate(-30,160,150)"/>
+            <ellipse cx="185" cy="140" rx="8" ry="3" transform="rotate(20,185,140)"/>
+            <ellipse cx="210" cy="138" rx="8" ry="3" transform="rotate(-10,210,138)"/>
+            <ellipse cx="235" cy="143" rx="8" ry="3" transform="rotate(35,235,143)"/>
+            <ellipse cx="255" cy="155" rx="7" ry="3" transform="rotate(-20,255,155)"/>
+            <ellipse cx="175" cy="162" rx="7" ry="3" transform="rotate(15,175,162)"/>
+            <ellipse cx="220" cy="158" rx="7" ry="3" transform="rotate(-25,220,158)"/>
+          </g>
+          <path d="M85 162 Q200 105 315 162" stroke="#6b4810" stroke-width="5" fill="none"/>
+          <text x="200" y="240" text-anchor="middle" font-family="serif" font-size="22" fill="rgba(245,220,160,0.7)" letter-spacing="2">Зерновий</text>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-tag">🌻 Мультизерновий</div>
+        <div class="product-name">Хліб із насінням</div>
+        <div class="product-desc">Соняшник, льон, кунжут і гарбузове насіння. Збагачений клітковиною та корисними жирами. Вага 750 г.</div>
+        <div class="product-footer">
+          <div class="product-price">185 грн <span>/ буханка</span></div>
+          <button class="btn-add" onclick="addToCart('Хліб із насінням')">+ Замовити</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SOURDOUGH -->
+
+<section id="why">
+  <div class="section-label">Наука і традиція</div>
+  <h2 class="section-title">Чому хліб на заквасці<br><em>кращий?</em></h2>
+  <p class="section-body">
+    Ферментація на живій заквасці — це не тренд, це тисячолітня мудрість. Дослідження підтверджують: такий хліб суттєво відрізняється від дріжджового.
+  </p>
+
+  <div class="why-grid">
+    <div>
+      <div class="comparison-table">
+        <div class="ct-header">
+          <span>Показник</span>
+          <span>🌿 Закваска</span>
+          <span>🏭 Магазинний</span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-label">Глікемічний індекс</span>
+          <span class="ct-good">Низький</span>
+          <span class="ct-bad">Високий</span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-label">Пробіотики</span>
+          <span class="ct-good">✓ Присутні</span>
+          <span class="ct-bad">Відсутні</span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-label">Фітинова кислота</span>
+          <span class="ct-good">Нейтралізована</span>
+          <span class="ct-bad">Блокує мінерали</span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-label">Термін свіжості</span>
+          <span class="ct-good">5–7 днів</span>
+          <span class="ct-bad">З консервантами</span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-label">Засвоєння поживних речовин</span>
+          <span class="ct-good">Покращене</span>
+          <span class="ct-bad">Знижене</span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-label">Добавки / Е-числа</span>
+          <span class="ct-good">Нуль</span>
+          <span class="ct-bad">До 20+</span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-label">Склад</span>
+          <span class="ct-good">3–5 інгредієнтів</span>
+          <span class="ct-bad">15–30 позицій</span>
+        </div>
+      </div>
+    </div>
+
+```
+<div class="benefits-list">
+  <div class="benefit-item">
+    <div class="benefit-icon">🦠</div>
+    <div>
+      <div class="benefit-title">Мікробіом кишківника</div>
+      <div class="benefit-desc">Молочнокисле бродіння виробляє корисні органічні кислоти, які живлять мікробіоту та зміцнюють імунітет.</div>
+    </div>
+  </div>
+  <div class="benefit-item">
+    <div class="benefit-icon">📉</div>
+    <div>
+      <div class="benefit-title">Стабільний цукор у крові</div>
+      <div class="benefit-desc">Нижчий ГІ означає повільне засвоєння, довше відчуття ситості та менше стрибків інсуліну.</div>
+    </div>
+  </div>
+  <div class="benefit-item">
+    <div class="benefit-icon">🧬</div>
+    <div>
+      <div class="benefit-title">Більше поживних речовин</div>
+      <div class="benefit-desc">Ферментація розщеплює фітинову кислоту і вивільняє залізо, цинк, магній — мінерали, що в звичайному хлібі залишаються недоступними.</div>
+    </div>
+  </div>
+  <div class="benefit-item">
+    <div class="benefit-icon">🌾</div>
+    <div>
+      <div class="benefit-title">Легкість для травлення</div>
+      <div class="benefit-desc">Довга ферментація частково розщеплює глютен, що робить хліб набагато легшим для шлунка навіть для чутливих людей.</div>
+    </div>
+  </div>
+  <div class="benefit-item">
+    <div class="benefit-icon">⏳</div>
+    <div>
+      <div class="benefit-title">Природний консервант</div>
+      <div class="benefit-desc">Кислоти закваски захищають хліб від цвілі без жодної хімії. Він залишається свіжим до тижня.</div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ARTICLES -->
+
+<section id="articles">
+  <div class="section-label">Корисно знати</div>
+  <h2 class="section-title">Статті про хліб<br>і <em>здоров'я</em></h2>
+  <div class="articles-grid">
+    <div class="article-card">
+      <div class="article-img" style="background: linear-gradient(135deg, #4a2e12 0%, #8b5e2a 50%, #c8933a 100%); position:relative; overflow:hidden;">
+        <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <defs>
+            <radialGradient id="ah1" cx="60%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#e8a840" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+          </defs>
+          <rect width="700" height="260" fill="url(#ah1)"/>
+          <!-- Wheat illustration -->
+          <g opacity="0.6">
+            <line x1="350" y1="260" x2="380" y2="60" stroke="#d4a853" stroke-width="3"/>
+            <ellipse cx="380" cy="52" rx="10" ry="30" fill="#d4a853"/>
+            <ellipse cx="370" cy="80" rx="8" ry="22" fill="#c8933a" transform="rotate(-25,370,80)"/>
+            <ellipse cx="390" cy="75" rx="8" ry="22" fill="#c8933a" transform="rotate(25,390,75)"/>
+            <line x1="300" y1="260" x2="320" y2="80" stroke="#c8833a" stroke-width="2" opacity="0.7"/>
+            <ellipse cx="320" cy="73" rx="8" ry="25" fill="#c8833a" opacity="0.8"/>
+            <line x1="400" y1="260" x2="430" y2="90" stroke="#d4a853" stroke-width="2.5" opacity="0.8"/>
+            <ellipse cx="430" cy="83" rx="9" ry="27" fill="#d4a853" opacity="0.9"/>
+          </g>
+          <text x="50" y="180" font-family="Georgia,serif" font-size="48" fill="rgba(245,235,200,0.12)" font-weight="700">ЗАКВАСКА</text>
+        </svg>
+      </div>
+      <div class="article-body">
+        <div class="article-cat">🔬 Наука харчування</div>
+        <div class="article-title">Хліб на заквасці vs. дріжджовий: що говорить наука у 2024 році</div>
+        <div class="article-desc">Нові дослідження Гарвардської школи охорони здоров'я підтвердили: регулярне вживання хліба на заквасці знижує маркери системного запалення на 18% порівняно зі стандартним дріжджовим. Розбираємо механізми та дивимося на докази.</div>
+        <a href="#" class="article-read">Читати далі →</a>
+      </div>
+    </div>
+
+```
+<div class="articles-side">
+  <div class="article-small">
+    <div class="article-cat">🧪 Мікробіологія</div>
+    <div class="article-title" style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--rye);line-height:1.3;margin:0.5rem 0;">Лактобацили та мікробіом: як закваска змінює кишківник</div>
+    <div class="article-desc" style="font-size:0.82rem;color:var(--muted);line-height:1.5;">Понад 50 штамів корисних бактерій у живій заквасці активно взаємодіють з мікробіотою людини.</div>
+    <a href="#" class="article-read">Читати →</a>
+  </div>
+  <div class="article-small" style="background:var(--cream);">
+    <div class="article-cat">🌾 Зернові культури</div>
+    <div class="article-title" style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--rye);line-height:1.3;margin:0.5rem 0;">Органічне борошно: чому це має значення для вашого хліба</div>
+    <div class="article-desc" style="font-size:0.82rem;color:var(--muted);line-height:1.5;">Пшениця без гліфосату та штучних добрив: різниця у складі та смаку.</div>
+    <a href="#" class="article-read">Читати →</a>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- DELIVERY & PAYMENT -->
+
+<section id="delivery">
+  <div class="section-label">Зручно і просто</div>
+  <h2 class="section-title">Доставка та <em>оплата</em></h2>
+
+  <div class="delivery-grid">
+    <div class="delivery-block">
+      <h3>🚚 Як отримати хліб</h3>
+      <div class="delivery-steps">
+        <div class="d-step">
+          <div class="d-num">01</div>
+          <div class="d-content">
+            <h4>Замовте до 18:00</h4>
+            <p>Залиште замовлення через форму або напишіть у Telegram/Instagram. Хліб випікається вночі з органічного тіста.</p>
+          </div>
+        </div>
+        <div class="d-step">
+          <div class="d-num">02</div>
+          <div class="d-content">
+            <h4>Підтвердження замовлення</h4>
+            <p>Ми надішлемо підтвердження та уточнимо адресу доставки протягом 30 хвилин.</p>
+          </div>
+        </div>
+        <div class="d-step">
+          <div class="d-num">03</div>
+          <div class="d-content">
+            <h4>Доставка вранці</h4>
+            <p>Свіжовипечений хліб привозимо з 8:00 до 12:00 наступного дня. Мінімальне замовлення — 1 буханка.</p>
+          </div>
+        </div>
+        <div class="d-step">
+          <div class="d-num">04</div>
+          <div class="d-content">
+            <h4>Самовивіз — безкоштовно</h4>
+            <p>Адреса пекарні: вул. Пшенична, 7, Київ. Пн–Сб з 8:00 до 14:00. Будемо раді вас зустріти!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+```
+<div class="delivery-block">
+  <h3>💳 Способи оплати</h3>
+  <div class="payment-options">
+    <div class="pay-card">
+      <div class="pay-icon">💳</div>
+      <div class="pay-info">
+        <h4>Картка онлайн</h4>
+        <p>Visa, Mastercard через безпечну форму оплати. Посилання надсилаємо в Telegram.</p>
+      </div>
+    </div>
+    <div class="pay-card">
+      <div class="pay-icon">📲</div>
+      <div class="pay-info">
+        <h4>Monobank / PrivatBank</h4>
+        <p>Переказ на картку або через SendMoney. Реквізити надсилаємо після підтвердження.</p>
+      </div>
+    </div>
+    <div class="pay-card">
+      <div class="pay-icon">💵</div>
+      <div class="pay-info">
+        <h4>Готівка при отриманні</h4>
+        <p>Доступно для самовивозу та для постійних клієнтів. При першому замовленні — передоплата 50%.</p>
+      </div>
+    </div>
+    <div class="pay-card" style="border-color: rgba(122,140,110,0.4);">
+      <div class="pay-icon" style="background: var(--sage);">🔄</div>
+      <div class="pay-info">
+        <h4>Підписка — знижка 10%</h4>
+        <p>Щотижнева доставка на вибір: 1–3 буханки. Оплата раз на місяць. Ніколи не залишайтесь без хліба!</p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <div class="wheat-divider">🌾</div>
+
+  <!-- Delivery info banner -->
+
+  <div style="display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; margin-top:1rem;">
+    <div style="text-align:center; padding:1.5rem 2rem; background:var(--cream); border:1px solid rgba(212,168,83,0.2); border-radius:4px; flex:1; min-width:180px;">
+      <div style="font-size:1.8rem;">🏙️</div>
+      <div style="font-family:'Playfair Display',serif; font-weight:700; color:var(--wheat); font-size:1.1rem; margin:0.4rem 0;">50 грн</div>
+      <div style="font-size:0.78rem; color:var(--muted); letter-spacing:0.08em;">Доставка по Києву</div>
+    </div>
+    <div style="text-align:center; padding:1.5rem 2rem; background:var(--cream); border:1px solid rgba(212,168,83,0.2); border-radius:4px; flex:1; min-width:180px;">
+      <div style="font-size:1.8rem;">🆓</div>
+      <div style="font-family:'Playfair Display',serif; font-weight:700; color:var(--wheat); font-size:1.1rem; margin:0.4rem 0;">Безкоштовно</div>
+      <div style="font-size:0.78rem; color:var(--muted); letter-spacing:0.08em;">При замовленні від 500 грн</div>
+    </div>
+    <div style="text-align:center; padding:1.5rem 2rem; background:var(--cream); border:1px solid rgba(212,168,83,0.2); border-radius:4px; flex:1; min-width:180px;">
+      <div style="font-size:1.8rem;">📦</div>
+      <div style="font-family:'Playfair Display',serif; font-weight:700; color:var(--wheat); font-size:1.1rem; margin:0.4rem 0;">Нова Пошта</div>
+      <div style="font-size:0.78rem; color:var(--muted); letter-spacing:0.08em;">По всій Україні</div>
+    </div>
+    <div style="text-align:center; padding:1.5rem 2rem; background:var(--cream); border:1px solid rgba(212,168,83,0.2); border-radius:4px; flex:1; min-width:180px;">
+      <div style="font-size:1.8rem;">📅</div>
+      <div style="font-family:'Playfair Display',serif; font-weight:700; color:var(--wheat); font-size:1.1rem; margin:0.4rem 0;">Пн – Сб</div>
+      <div style="font-size:0.78rem; color:var(--muted); letter-spacing:0.08em;">Дні доставки</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+
+<section id="contacts">
+  <div class="contacts-bg-circle"></div>
+  <div style="position:relative;">
+    <div class="section-label">Зв'яжіться з нами</div>
+    <h2 class="section-title">Замовити або<br><em>запитати</em></h2>
+
+```
+<div class="contacts-grid">
+  <div>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:rgba(245,240,232,0.65); line-height:1.7; margin-bottom:2.5rem; font-weight:300;">
+      Ми раді кожному запиту. Пишіть, дзвоніть або завітайте особисто — завжди відповімо та допоможемо обрати ідеальний хліб.
+    </p>
+    <div class="contact-methods">
+      <a href="tel:+380501234567" class="contact-item">
+        <div class="ci-icon">📞</div>
+        <div>
+          <div class="ci-label">Телефон</div>
+          <div class="ci-value">+38 (050) 123-45-67</div>
+        </div>
+      </a>
+      <a href="https://t.me/zhyvyikhleb" class="contact-item">
+        <div class="ci-icon">✈️</div>
+        <div>
+          <div class="ci-label">Telegram</div>
+          <div class="ci-value">@zhyvyikhleb</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/zhyvyikhleb" class="contact-item">
+        <div class="ci-icon">📸</div>
+        <div>
+          <div class="ci-label">Instagram</div>
+          <div class="ci-value">@zhyvyikhleb</div>
+        </div>
+      </a>
+      <a href="mailto:hello@zhyvyikhleb.ua" class="contact-item">
+        <div class="ci-icon">✉️</div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-value">hello@zhyvyikhleb.ua</div>
+        </div>
+      </a>
+      <div class="contact-item" style="cursor:default;">
+        <div class="ci-icon">📍</div>
+        <div>
+          <div class="ci-label">Адреса пекарні</div>
+          <div class="ci-value">вул. Пшенична, 7, Київ · Пн–Сб 8:00–14:00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ваше ім'я</label>
+          <input type="text" placeholder="Оля Коваленко">
+        </div>
+        <div class="form-group">
+          <label>Телефон / Telegram</label>
+          <input type="text" placeholder="+38 050 ...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Оберіть хліб</label>
+        <select>
+          <option value="">— Оберіть —</option>
+          <option>Деревенський пшеничний — 150 грн</option>
+          <option>Темний житній бородинський — 170 грн</option>
+          <option>Хліб із насінням — 185 грн</option>
+          <option>Асорті (2–3 буханки)</option>
+          <option>Підписка (щотижнева доставка)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Адреса або спосіб отримання</label>
+        <input type="text" placeholder="вул. Хрещатик, 1 або самовивіз">
+      </div>
+      <div class="form-group">
+        <label>Коментар</label>
+        <textarea placeholder="Алергії, особливі побажання, кількість..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="submitOrder()" style="width:100%; display:block; text-align:center; border:none; font-size:0.85rem;">
+        Відправити замовлення 🌾
+      </button>
+      <p style="font-size:0.75rem; color:rgba(245,240,232,0.35); text-align:center; line-height:1.5;">
+        Підтвердимо замовлення у Telegram/Viber протягом 1 години. Оплата після підтвердження.
+      </p>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="font-size:1.5rem;">Живий<span>Хліб</span></a>
+      <p>Ремісничий хліб на живій заквасці з органічного борошна. Щодня з любов'ю та терпінням. Без дріжджів, без добавок, без компромісів.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Продукти</h5>
+      <ul>
+        <li><a href="#products">Пшеничний</a></li>
+        <li><a href="#products">Житній</a></li>
+        <li><a href="#products">Зерновий</a></li>
+        <li><a href="#delivery">Підписка</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Інформація</h5>
+      <ul>
+        <li><a href="#why">Чому закваска</a></li>
+        <li><a href="#articles">Статті</a></li>
+        <li><a href="#delivery">Доставка</a></li>
+        <li><a href="#delivery">Оплата</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Контакти</h5>
+      <ul>
+        <li><a href="tel:+380501234567">+38 050 123-45-67</a></li>
+        <li><a href="https://t.me/zhyvyikhleb">Telegram</a></li>
+        <li><a href="https://instagram.com/zhyvyikhleb">Instagram</a></li>
+        <li><a href="mailto:hello@zhyvyikhleb.ua">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 ЖивийХліб · Всі права захищені</p>
+    <p style="color:rgba(212,168,83,0.4);">🌾 Випечено з любов'ю в Україні</p>
+  </div>
+</footer>
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  function addToCart(name) {
+    showToast(`✓ «${name}» додано до замовлення!`);
+  }
+
+  function submitOrder() {
+    showToast('🌾 Дякуємо! Підтвердимо у Telegram протягом години.');
+  }
+
+  // Scroll animation observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.style.opacity = '1';
+        el.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.product-card, .article-card, .article-small, .benefit-item, .d-step, .pay-card, .contact-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(25px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Close mobile menu on outside click
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('mobileMenu');
+    const ham = document.getElementById('ham');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !ham.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>
